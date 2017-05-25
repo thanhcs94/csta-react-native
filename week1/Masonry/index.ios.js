@@ -13,10 +13,11 @@ import {
   View,
 } from 'react-native';
 import MasonryList from './src/components/masonrylist';
+import Welcome from './src/components/welcome';
 export default class Masonry extends Component {
   render() {
     return (
-      <MasonryList/>
+      <Welcome/>
     );
   }
 }
