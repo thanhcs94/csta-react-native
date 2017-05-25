@@ -18,3 +18,14 @@ export default class Welcome extends Component {
     }
 }
 ```
+default
+
+```javascript
+ _onClickText = (x = -1)=>{
+        x ==-1?alert('x = -1'):alert(x);
+    }
+//onPress = {()=>this._onClickText(100)} : alert :  100
+//onPress = {()=>this._onClickText()}    : alert :  -1
+//onPress = {this._onClickText}>         : _onClickText = ()=>{}
+```
+

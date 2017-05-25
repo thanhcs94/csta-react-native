@@ -14,13 +14,14 @@ import {
 } from 'react-native';
 
 export default class Welcome extends Component {
-    _onClickText =(...args)=> {
-        alert((args[0]+ args[1] + '\n length args = '+ args.length));
+    _onClickText = ()=>{
+        x=-1;
+        x ==-1?alert('x = -1'):alert(x);
     }
     render(){
         return (
             <View style={{alignItems:'center',justifyContent:'center', flex:1}}>
-                <TouchableOpacity onPress = {()=>this._onClickText(10, 100)}>
+                <TouchableOpacity onPress = {this._onClickText}>
                      <Text>This is a clickable Text</Text>
                 </TouchableOpacity>
             </View>
