@@ -14,15 +14,19 @@ import {
 } from 'react-native';
 
 export default class Welcome extends Component {
-    _onClickText = ()=>{
-        x=-1;
-        x ==-1?alert('x = -1'):alert(x);
-    }
+
+  static navigationOptions = ({ navigation })=>({
+   title: 'welcome BOSS : '+ navigation.state.params.data,
+  });
+
+    _onClickText = (data)=>alert('Hello BOSS : ' + data);
+
     render(){
+        const {params} = this.props.navigation.state;   
         return (
             <View style={{alignItems:'center',justifyContent:'center', flex:1}}>
-                <TouchableOpacity onPress = {this._onClickText}>
-                     <Text>This is a clickable Text</Text>
+                <TouchableOpacity onPress ={()=>this._onClickText(params.data)}>
+                     <Text>Hi Boss, {params.data}</Text>
                 </TouchableOpacity>
             </View>
         );   

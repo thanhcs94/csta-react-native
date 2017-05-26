@@ -11,15 +11,20 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
 } from 'react-native';
+import HomeScreen from './src/Apps';
 import MasonryList from './src/components/masonrylist';
 import Welcome from './src/components/welcome';
-export default class Masonry extends Component {
-  render() {
-    return (
-      <Welcome/>
-    );
-  }
-}
+
+import {
+  StackNavigator,
+} from 'react-navigation';
+
+const Masonry = StackNavigator({
+  Home: { screen: HomeScreen },
+  List: {screen: MasonryList},
+  Well: {screen: Welcome},
+});
 
 AppRegistry.registerComponent('Masonry', () => Masonry);
