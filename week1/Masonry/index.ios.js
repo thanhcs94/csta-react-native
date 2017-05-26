@@ -22,7 +22,7 @@ import {
 } from 'react-navigation';
 
 const Masonry = StackNavigator({
-  Home: { screen: HomeScreen },
+  Home: {screen: HomeScreen},
   List: {screen: MasonryList},
   Well: {screen: Welcome},
 });

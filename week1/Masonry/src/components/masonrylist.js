@@ -19,9 +19,9 @@ const { width } = Dimensions.get('window');
 
 export default class MasonryList extends Component {
   
-  static navigationOptions = {
-    title: 'Chat with Lucy',
-  };
+  static navigationOptions = ({navigation}) => ({
+    title: navigation.state.params.title,
+  });
   numberOfColumns = 3;
 
   constructor(props) {

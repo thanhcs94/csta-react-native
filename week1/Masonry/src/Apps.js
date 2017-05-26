@@ -22,7 +22,7 @@ export default class HomeScreen extends Component {
     const {navigate}  =  this.props.navigation;
     return (
       <View style={{alignItems:'center',justifyContent:'center', flex:1}}>
-          <TouchableOpacity onPress ={()=>navigate('List')}>
+          <TouchableOpacity onPress ={()=>navigate('List', {title :'Gridview'})}>
               <Text>Move to MasonryList Screen</Text>
           </TouchableOpacity>
 
