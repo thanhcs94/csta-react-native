@@ -10,19 +10,29 @@ import {
   View,
   ListView,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  Button
+  
 } from 'react-native';
-
+const isInfo  = false;
 export default class Welcome extends Component {
-
-  static navigationOptions = ({ navigation })=>({
-   title: 'welcome BOSS : '+ navigation.state.params.data,
-  });
-
+  static navigationOptions = ({ navigation })=>{  
+      const {state, setParams} = navigation;
+      const isInfo = state.params.something === 'info'; 
+      return {
+        title: 'welcome BOSS : '+ state.params.data,
+        headerRight: (
+            <Button
+                title={isInfo ? 'Done' : state.params.data+'s info'}
+                onPress={() => setParams({ something: isInfo ? 'none' : 'info'})}
+            />
+            ),
+      };
+  };
     _onClickText = (data)=>alert('Hello BOSS : ' + data);
 
     render(){
-        const {params} = this.props.navigation.state;   
+         const {params} = this.props.navigation.state;  
         return (
             <View style={{alignItems:'center',justifyContent:'center', flex:1}}>
                 <TouchableOpacity onPress ={()=>this._onClickText(params.data)}>

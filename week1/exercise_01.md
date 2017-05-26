@@ -33,7 +33,7 @@ default
 
 Index.ios or . Android
 
-```
+```javascript
 import {
   StackNavigator,
 } from 'react-navigation';
@@ -46,9 +46,9 @@ const Masonry = StackNavigator({
 
 AppRegistry.registerComponent('Masonry', () => Masonry);
 ```
-How to use it
+How to use it in HomeScreen
 
-```
+```javascript
 static navigationOptions = {
     title: 'Home',
   };
@@ -71,7 +71,7 @@ render() {
 ```
  How to get data from Navigation
 
- ```
+ ```javascript
  static navigationOptions = ({ navigation })=>({
    title: 'welcome BOSS : '+ navigation.state.params.data,
   });
