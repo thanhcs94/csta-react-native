@@ -29,3 +29,56 @@ default
 //onPress = {this._onClickText}>         : _onClickText = ()=>{}
 ```
 
+# StackNavigator
+
+Index.ios or . Android
+
+```
+import {
+  StackNavigator,
+} from 'react-navigation';
+
+const Masonry = StackNavigator({
+  Home: { screen: HomeScreen },
+  List: {screen: MasonryList},
+  Well: {screen: Welcome},
+});
+
+AppRegistry.registerComponent('Masonry', () => Masonry);
+```
+How to use it
+
+```
+static navigationOptions = {
+    title: 'Home',
+  };
+
+render() {
+    const {navigate}  =  this.props.navigation;
+    return (
+      <View style={{alignItems:'center',justifyContent:'center', flex:1}}>
+          <TouchableOpacity onPress ={()=>navigate('List')}>
+              <Text>Move to MasonryList Screen</Text>
+          </TouchableOpacity>
+
+           <TouchableOpacity style={{marginTop:16}} onPress ={()=>navigate('Well', {data:'@thanhcs94'})}>
+              <Text>Move to Welcome Screen  : Arrow Function</Text>
+          </TouchableOpacity>
+
+      </View>
+    );
+  }
+```
+ How to get data from Navigation
+
+ ```
+ static navigationOptions = ({ navigation })=>({
+   title: 'welcome BOSS : '+ navigation.state.params.data,
+  });
+
+ const {params} = this.props.navigation.state;   
+ onPress ={()=>this._onClickText(params.data) 
+ ```
+
+
+
