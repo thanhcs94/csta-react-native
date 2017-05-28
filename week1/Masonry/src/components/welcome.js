@@ -15,6 +15,10 @@ import {
   
 } from 'react-native';
 const isInfo  = false;
+import {
+  StackNavigator,
+} from 'react-navigation';
+
 export default class Welcome extends Component {
   static navigationOptions = ({ navigation })=>{  
       const {state, setParams} = navigation;
@@ -35,7 +39,7 @@ export default class Welcome extends Component {
          const {params} = this.props.navigation.state;  
         return (
             <View style={{alignItems:'center',justifyContent:'center', flex:1}}>
-                <TouchableOpacity onPress ={()=>this._onClickText(params.data)}>
+                <TouchableOpacity onPress ={()=>this.props.navigation.navigate('Pro')}>
                      <Text>Hi Boss, {params.data}</Text>
                 </TouchableOpacity>
             </View>

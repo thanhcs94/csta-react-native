@@ -16,6 +16,7 @@ import {
 import HomeScreen from './src/Apps';
 import MasonryList from './src/components/masonrylist';
 import Welcome from './src/components/welcome';
+import Profile from './src/components/profile';
 
 import {
   StackNavigator,
@@ -25,6 +26,7 @@ const Masonry = StackNavigator({
   Home: {screen: HomeScreen},
   List: {screen: MasonryList},
   Well: {screen: Welcome},
+  Pro:{screen: Profile}
 });
 
 AppRegistry.registerComponent('Masonry', () => Masonry);
