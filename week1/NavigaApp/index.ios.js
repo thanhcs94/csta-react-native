@@ -17,3 +17,12 @@ export default class NavigaApp extends Component {
   }
 }
 AppRegistry.registerComponent('NavigaApp', () => NavigaApp);
+
+/**
+ * Hello
+ * Thank @abc this is so much!
+ * What i like
+ * Areas to improves 
+ * Overall score
+ * Bye!
+ */
