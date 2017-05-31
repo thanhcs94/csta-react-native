@@ -13,10 +13,15 @@ export default class Home extends Component{
         return(
             <View style ={{flex:1, alignItems:'center', justifyContent:'center'}}>
                 <Text>Home</Text>
+
+                  <TouchableOpacity onPress = {()=>this.props.navigation.navigate('MDetail')}>
+                     <Text>Go To Details</Text>
+                </TouchableOpacity>
+
                 <TouchableOpacity
                     onPress = {()=>this.props.navigation.navigate('DrawerOpen',{sendingdata:'thanh dep trai'})}
                 >
-                    <Text style= {{backgroundColor:'#ffcc00', padding:10, marginTop:30}}>Go to Details</Text>
+                    <Text style= {{backgroundColor:'#ffcc00', padding:10, marginTop:30}}>Open Menu</Text>
                 </TouchableOpacity>
             </View>
         );
