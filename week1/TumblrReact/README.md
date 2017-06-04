@@ -16,9 +16,38 @@
 
 ```javascript
   react-native init TumblrReact
-  cd TubmlrReact
+  cd TumblrReact
   react native run-ios
 ```
 
+# Milestone 2: Fetch Actual Data
+* Get data
 
+```javascript
+getDatafromTumblr() {
+        return fetch(your_api)
+          .then((response) => response.json())
+          .then((responseJson) => {
+            console.log(responseJson);
+            this.setState({
+              holderText: 'SUCCESS'
+            })
+            return responseJson;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+```
+```javascript
+componentDidMount () {
+    this.getDatafromTumblr();
+  }
+```
+To check your data fetching
+```javascript
+  react-native log-ios/android
+```
+
+* Create an listview and renderow
 

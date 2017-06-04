@@ -13,19 +13,35 @@ import {
 } from 'react-native';
 
 export default class TumblrReact extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      holderText: 'loading....'
+    }
+  }
+  componentDidMount () {
+    this.getDatafromTumblr();
+  }
+  //https://api.tumblr.com/v2/blog/xkcn.info/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV
+  getDatafromTumblr() {
+        return fetch("https://api.tumblr.com/v2/blog/xkcn.info/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV")
+          .then((response) => response.json())
+          .then((responseJson) => {
+            console.log(responseJson);
+            this.setState({
+              holderText: 'SUCCESS'
+            })
+            return responseJson;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+          <Text>{this.state.holderText}</Text>
       </View>
     );
   }
