@@ -51,3 +51,35 @@ To check your data fetching
 
 * Create an listview and renderow
 
+init yout listview
+
+```javascript
+constructor(props){
+    super(props);
+    this.state = {
+      dataSource : new ListView.DataSource({rowHasChanged:(r2, r1)=> r1!=r2}),
+      holderText: 'loading....'
+    }
+  }
+```
+```javascript
+  <ListView
+      dataSource= {this.state.dataSource}
+      renderRow = {this.renderRow}
+  />
+```
+
+```javascript
+renderRow =(rowData)=>{
+     return (
+       <View>
+          <Image source={{uri:rowData.photos[0].original_size.url}} style ={{width:400, height:300}}/>
+          <Text style = {{marginTop:8, marginBottom:32 ,fontSize:13}}>{rowData.caption}</Text>
+       </View>
+     )
+    }
+
+```
+* Todo 
+#1 : Flatlist
+#2 : Griview
