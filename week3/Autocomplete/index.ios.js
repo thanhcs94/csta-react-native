@@ -9,14 +9,21 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TextInput,
+  ListView,
+  TouchableOpacity
 } from 'react-native';
-
+const json = "";
 export default class Autocomplete extends Component {
   constructor(props){
     super(props);
     this.state ={
-      data : ''
+     data: new ListView.DataSource({
+        rowHasChanged:(r1, r2) => r1!==r2
+      }),
+      text: '',
+      dataSearch: ''
     }
   }
 
@@ -28,9 +35,11 @@ export default class Autocomplete extends Component {
     return fetch('https://thanhcs.xyz/code/dummy_data.json')
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({
-          data: JSON.stringify(responseJson.notification)
-        })
+        json = responseJson.notification;
+        // this.setState({
+        //   data: this.state.data.cloneWithRows(responseJson.notification)
+        // })
+        dataSearch = responseJson.notification;
         console.log("DATAAAAAA "+JSON.stringify(responseJson.notification));
         return responseJson.notification;
       })
@@ -38,12 +47,65 @@ export default class Autocomplete extends Component {
         console.error(error);
       });
   }
+
+  filterSearch(text){
+  console.log(text);
+  if(text==''){
+this.setState({
+            data: new ListView.DataSource({
+        rowHasChanged:(r1, r2) => r1!==r2
+          }),
+            text: ''
+        })
+  }else{
+  const newData = dataSearch.filter(function(item){
+            const itemData = item.body.toUpperCase()
+            const textData = text.toUpperCase()
+            return itemData.indexOf(textData) ==0
+            // >=-1 =  contain; ==0 mean start with
+        })
+        this.setState({
+            data: this.state.data.cloneWithRows(newData),
+            text: text
+        })
+  }
+}
+
+
+renderRow(property){
+  return(
+    <TouchableOpacity onPress ={()=>{
+      this.setState({
+        text:property.body,
+        data:new ListView.DataSource({
+        rowHasChanged:(r1, r2) => r1!==r2
+        })
+      })
+      }}>
+        <Text>{property.body}</Text>
+   </TouchableOpacity>
+  )
+}
+
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-        {this.state.data}
-        </Text>
+ <View style = {styles.boderView}>
+        <TextInput
+       style = {styles.searchView}
+       placeholder ='Search'
+       value = {this.state.text}
+       onChangeText={(text)=>this.filterSearch(text)}
+       />  
+  </View>
+
+   <ListView
+        dataSource = {this.state.data}
+        renderRow  = {this.renderRow.bind(this)}
+        // use bind this to send context :  if not , props is not define in render row
+      />
+
       </View>
     );
   }
@@ -52,8 +114,10 @@ export default class Autocomplete extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingRight : 16,
+    paddingLeft : 16,
+    paddingBottom : 16,
+    paddingTop : 40,
     backgroundColor: '#F5FCFF',
   },
   welcome: {
@@ -65,6 +129,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+   boderView:{
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 10,
+    height:40,
+    borderColor:'#E4E4E4',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  searchView:{
+    paddingLeft: 16,
+    fontSize: 18,
+    height:30,
+    color:'#006789',
   },
 });
 
