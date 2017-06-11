@@ -32,7 +32,7 @@ export default class Autocom extends Component {
   }
   
   fetchDataFromMyBlog(){
-    return fetch('https://thanhcs.xyz/code/dummy_data.json')
+    return fetch(this.props.url)
       .then((response) => response.json())
       .then((responseJson) => {
         json = responseJson.notification;
@@ -51,24 +51,24 @@ export default class Autocom extends Component {
   filterSearch(text){
   console.log(text);
   if(text==''){
-this.setState({
-            data: new ListView.DataSource({
-        rowHasChanged:(r1, r2) => r1!==r2
-          }),
-            text: ''
-        })
+    this.setState({
+                data: new ListView.DataSource({
+                    rowHasChanged:(r1, r2) => r1!==r2
+                    }),
+                text: ''
+            })
   }else{
-  const newData = dataSearch.filter(function(item){
-            const itemData = item.body.toUpperCase()
-            const textData = text.toUpperCase()
-            return itemData.indexOf(textData) ==0
-            // >=-1 =  contain; ==0 mean start with
-        })
-        this.setState({
-            data: this.state.data.cloneWithRows(newData),
-            text: text
-        })
-  }
+    const newData = dataSearch.filter(function(item){
+                const itemData = item.body.toUpperCase()
+                const textData = text.toUpperCase()
+                return itemData.indexOf(textData) ==0
+                // >=-1 =  contain; ==0 mean start with
+            })
+            this.setState({
+                data: this.state.data.cloneWithRows(newData),
+                text: text
+            })
+    }
 }
 
 
@@ -80,13 +80,16 @@ renderRow(property){
         data:new ListView.DataSource({
         rowHasChanged:(r1, r2) => r1!==r2
         })
-      })
+      }),
+       alert(property.body);
       }}>
-        <Text>{property.body}</Text>
+        <View>
+            <Text style ={{color:'#cccccc', paddingTop:4, paddingBottom:4}}>{property.body}</Text>
+            <View style={{height:0.5, backgroundColor:'#cccccc'}}></View>
+        </View>
    </TouchableOpacity>
   )
 }
-
 
   render() {
     return (
@@ -113,11 +116,8 @@ renderRow(property){
 
 const styles = StyleSheet.create({
   container: {
-    paddingRight : 16,
-    paddingLeft : 16,
     paddingBottom : 16,
     paddingTop : 16,
-    backgroundColor: '#ffcc00',
   },
   welcome: {
     fontSize: 20,
@@ -143,6 +143,6 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     fontSize: 18,
     height:30,
-    color:'#006789',
+    color:'#ffffff',
   },
 });
